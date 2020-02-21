@@ -25,7 +25,7 @@ function riffle(deck) {
     outdeck.push(deck[x])
     outdeck.push(deck[x+half])
   }
-  // handle edge case for decks with off number of cards
+  // handle edge case for decks with odd number of cards
   if(deck.length % 2)
     outdeck.push(deck[deck.length])
 
@@ -47,3 +47,16 @@ function cut(deck, position) {
 
 cut(deck)
 console.log(deck)
+
+// just a dev stub for now, need to build it out and test it
+// copied from: https://www.tutorialspoint.com/what-is-fisher-yates-shuffle-in-javascript
+function fisher_yates() {
+  var arr = ['A','B','C','D','E','F','G','H']
+   var i = arr.length, k , temp;      // k is to generate random index and temp is to swap the values
+   while(--i > 0){
+    k = Math.floor(Math.random() * (i+1))
+    temp = arr[k]
+    arr[k] = arr[i]
+    arr[i] = temp
+  }
+}
