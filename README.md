@@ -19,3 +19,6 @@ A collection of card shuffling techniques in a variety of languages, frameworks,
 * Fisher-Yates (aka Knuth) shuffle implementation
   * See https://github.com/Daplie/knuth-shuffle
   * See https://bost.ocks.org/mike/shuffle/
+* API
+* Frontend Interface
+* Visualizations
