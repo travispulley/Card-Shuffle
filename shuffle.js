@@ -1,37 +1,27 @@
-// produce a "deck" of 52 "cards"
-let deck = []
-for(let x=0; x<52; ++x) {
-  deck.push(x)
+// shuffle by sorting each card by a random value
+// returns new deck
+function random_shuffle(deck) {    
+  return deck.map(x => { return {card: x, order: Math.random()} })
+             .sort((a,b) => a.order - b.order)
+             .map(x => x.card)  
 }
-
-// shuffle by giving each one a random value that's used to sort
-deck = deck.map(x => { return {card: x, order: Math.random()}})
-
-function order_sort(a, b) {
-  return a.order - b.order
-}
-
-console.log(deck.sort(order_sort))
 
 // split the deck in half, then interlace the cards
 // returns new deck
 function riffle(deck) {
   const length = deck.length, half = Math.floor(length/2)
-  const outdeck = []
-
-  console.log(length, half)
+  const newdeck = []
 
   for(let x=0; x<half; ++x) {
-    outdeck.push(deck[x])
-    outdeck.push(deck[x+half])
+    newdeck.push(deck[x])
+    newdeck.push(deck[x+half])
   }
   // handle edge case for decks with odd number of cards
   if(deck.length % 2)
-    outdeck.push(deck[deck.length])
+    newdeck.push(deck[deck.length])
 
-  return outdeck
+  return newdeck
 }
-console.log(riffle(deck))
 
 // reorder the deck along a split point, random if not supplied
 // IDEA: slice instead of splice to preserve input
@@ -45,9 +35,6 @@ function cut(deck, position) {
   deck.splice(0, 0, ...removed)
 }
 
-cut(deck)
-console.log(deck)
-
 // just a dev stub for now, need to build it out and test it
 // copied from: https://www.tutorialspoint.com/what-is-fisher-yates-shuffle-in-javascript
 function fisher_yates() {
@@ -59,4 +46,10 @@ function fisher_yates() {
     arr[k] = arr[i]
     arr[i] = temp
   }
+}
+
+module.exports = {
+  random_shuffle,
+  riffle,
+  cut
 }
