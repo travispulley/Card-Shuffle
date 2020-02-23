@@ -18,8 +18,7 @@ A collection of card shuffling techniques in a variety of languages, frameworks,
 * Python Implementation
 * More, Better Unit Tests
 * Code Cleanup and Organization
-  * See https://github.com/Daplie/knuth-shuffle
-  * See https://bost.ocks.org/mike/shuffle/
 * API
 * Frontend Interface
 * Visualizations
+  * See https://bost.ocks.org/mike/shuffle/
