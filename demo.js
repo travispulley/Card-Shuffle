@@ -20,7 +20,7 @@ deck = deck.map(x => {
 console.log("Unshuffled Deck", deck)
 
 newdeck = shuffle.random_shuffle(deck)
-console.log("Random shuffle", newdeck)
+console.log("Random Shuffle", newdeck)
 
 newdeck = [...deck]
 shuffle.fisher_yates(newdeck)
@@ -33,6 +33,14 @@ newdeck = [...deck]
 shuffle.cut(newdeck)
 console.log("Cut", newdeck)
 
+console.log("Iterations of Cut and Riffle")
+newdeck = [...deck]
+for(let x=0; x < 3; ++x) {
+  shuffle.cut(newdeck)
+  newdeck = shuffle.riffle(newdeck)
+  console.log(`Pass ${x+1}:`, newdeck)
+}
+
 // Performance stats
 const { PerformanceObserver, performance } = require('perf_hooks')
 
@@ -44,20 +52,33 @@ const obs = new PerformanceObserver((items) => {
 obs.observe({ entryTypes: ['measure'] })
 
 const loops = 100000
-console.log(`Performance of ${loops} loops`)
-
+console.log(`Performance of ${loops} loops:`)
 
 performance.mark('A')
-let perfdeck
+for(let x=0; x < loops; ++x) { shuffle.riffle(newdeck) }
+performance.mark('B')
+performance.measure('Riffle', 'A', 'B')
+
+performance.mark('A')
+for(let x=0; x < loops; ++x) { shuffle.cut(newdeck) }
+performance.mark('B')
+performance.measure('Cut', 'A', 'B')
+
+performance.mark('A')
 for(let x=0; x < loops; ++x) {
-  perfdeck = shuffle.random_shuffle(newdeck)
+  shuffle.cut(newdeck)
+  newdeck = shuffle.riffle(newdeck)
 }
+performance.mark('B')
+performance.measure('Cut and Riffle', 'A', 'B')
+
+performance.mark('A')
+for(let x=0; x < loops; ++x) { shuffle.fisher_yates(newdeck) }
+performance.mark('B')
+performance.measure('Fisher-Yates', 'A', 'B')
+
+performance.mark('A')
+for(let x=0; x < loops; ++x) { perfdeck = shuffle.random_shuffle(newdeck) }
 performance.mark('B')
 performance.measure('Random Shuffle', 'A', 'B')
 
-performance.mark('A')
-for(let x=0; x < loops; ++x) {
-  shuffle.fisher_yates(newdeck)
-}
-performance.mark('B')
-performance.measure('Fisher-Yates', 'A', 'B')
