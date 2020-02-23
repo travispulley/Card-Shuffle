@@ -33,6 +33,7 @@ function cut(deck, position = Math.floor(Math.random() * (deck.length-1))) {
 }
 
 // Fisher-Yates (aka Knuth) shuffle
+// This is the most optimal method known to exist?
 // Mutates the input deck
 function fisher_yates(deck) {
   let i = deck.length
@@ -40,10 +41,10 @@ function fisher_yates(deck) {
   while(--i > 0) {
     // swap values with a random location below or at this index
     rand = Math.floor(Math.random() * (i+1))
-    // IDEA: would adding if(i !== rand) make this faster? test it out
-    temp = deck[rand]
+    // PERF: adding if(i !== rand) here would make this ~15% slower
+    temp       = deck[rand]
     deck[rand] = deck[i]
-    deck[i] = temp
+    deck[i]    = temp
   }
 }
 
