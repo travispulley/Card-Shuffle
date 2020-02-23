@@ -1,4 +1,5 @@
 // shuffle by sorting each card by a random value
+// this is ~9 times slower than Fisher-Yates
 // returns new deck
 function random_shuffle(deck) {    
   return deck.map(x => { return {card: x, order: Math.random()} })

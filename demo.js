@@ -32,3 +32,32 @@ console.log("Riffle", newdeck)
 newdeck = [...deck]
 shuffle.cut(newdeck)
 console.log("Cut", newdeck)
+
+// Performance stats
+const { PerformanceObserver, performance } = require('perf_hooks')
+
+const obs = new PerformanceObserver((items) => {
+  const { name, duration } = items.getEntries()[0]
+  console.log(name, duration + ' ms')
+  performance.clearMarks()
+})
+obs.observe({ entryTypes: ['measure'] })
+
+const loops = 100000
+console.log(`Performance of ${loops} loops`)
+
+
+performance.mark('A')
+let perfdeck
+for(let x=0; x < loops; ++x) {
+  perfdeck = shuffle.random_shuffle(newdeck)
+}
+performance.mark('B')
+performance.measure('Random Shuffle', 'A', 'B')
+
+performance.mark('A')
+for(let x=0; x < loops; ++x) {
+  shuffle.fisher_yates(newdeck)
+}
+performance.mark('B')
+performance.measure('Fisher-Yates', 'A', 'B')

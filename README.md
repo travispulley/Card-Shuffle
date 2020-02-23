@@ -8,10 +8,10 @@ A collection of card shuffling techniques in a variety of languages, frameworks,
   * Cut
   * Fisher-Yates (aka Knuth) Shuffle
 * Demo Runner (for JavaScript code)
+  * Some Performance Tests
 
 ## TODO
 * Deck-specific code in its own module
-* Performance Tests
 * TypeScript Implementation
 * GoLang Implementation
 * C# Implementation
