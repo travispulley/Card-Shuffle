@@ -14,3 +14,5 @@ test('Riffle doesn\'t lose any cards', () => {
   deckLength = deck.length
   expect(riffle(deck).length).toBe(deckLength)
 })
+
+// IDEA: test to ensure cut behaves at every cut point
