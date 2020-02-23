@@ -25,31 +25,33 @@ function riffle(deck) {
 
 // reorder the deck along a split point, random if not supplied
 // IDEA: slice instead of splice to preserve input
-// mutates existing deck
+// Mutates the input deck
 function cut(deck, position) {
   if(typeof(position) === "undefined")
     position = Math.floor(Math.random() * deck.length)
   
   let removed = deck.splice(position, deck.length-position)
-  // console.log(position, removed, deck)
   deck.splice(0, 0, ...removed)
 }
 
-// just a dev stub for now, need to build it out and test it
-// copied from: https://www.tutorialspoint.com/what-is-fisher-yates-shuffle-in-javascript
-function fisher_yates() {
-  var arr = ['A','B','C','D','E','F','G','H']
-   var i = arr.length, k , temp;      // k is to generate random index and temp is to swap the values
-   while(--i > 0){
-    k = Math.floor(Math.random() * (i+1))
-    temp = arr[k]
-    arr[k] = arr[i]
-    arr[i] = temp
+// Fisher-Yates (aka Knuth) shuffle
+// Mutates the input deck
+function fisher_yates(deck) {
+  let i = deck.length
+  let rand, temp
+  while(--i > 0) {
+    // swap values with a random location below or at this index
+    rand = Math.floor(Math.random() * (i+1))
+    // IDEA: would adding if(i !== rand) make this faster? test it out
+    temp = deck[rand]
+    deck[rand] = deck[i]
+    deck[i] = temp
   }
 }
 
 module.exports = {
   random_shuffle,
   riffle,
-  cut
+  cut,
+  fisher_yates
 }

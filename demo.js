@@ -5,6 +5,7 @@ let deck = []
 for(let x=0; x<52; ++x) {
   deck.push(x)
 }
+let newdeck // for copies
 
 // mapping to a standard 52-card deck
 deck = deck.map(x => {
@@ -14,13 +15,20 @@ deck = deck.map(x => {
   let value = values[x % 13]
   return { suit, value, number: x }
 })
+
+// output function results
 console.log("Unshuffled Deck", deck)
 
-let newdeck = shuffle.random_shuffle(deck)
+newdeck = shuffle.random_shuffle(deck)
 console.log("Random shuffle", newdeck)
+
+newdeck = [...deck]
+shuffle.fisher_yates(newdeck)
+console.log("Fisher-Yates (Knuth) Shuffle", newdeck)
 
 newdeck = shuffle.riffle(deck)
 console.log("Riffle", newdeck)
 
-shuffle.cut(deck)
-console.log("Cut", deck)
+newdeck = [...deck]
+shuffle.cut(newdeck)
+console.log("Cut", newdeck)

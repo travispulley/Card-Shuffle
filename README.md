@@ -6,6 +6,7 @@ A collection of card shuffling techniques in a variety of languages, frameworks,
   * Random Sort
   * Riffle
   * Cut
+  * Fisher-Yates (aka Knuth) Shuffle
 * Demo Runner (for JavaScript code)
 
 ## TODO
@@ -17,7 +18,6 @@ A collection of card shuffling techniques in a variety of languages, frameworks,
 * Python Implementation
 * More, Better Unit Tests
 * Code Cleanup and Organization
-* Fisher-Yates (aka Knuth) shuffle implementation
   * See https://github.com/Daplie/knuth-shuffle
   * See https://bost.ocks.org/mike/shuffle/
 * API
