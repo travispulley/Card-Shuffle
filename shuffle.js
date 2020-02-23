@@ -25,13 +25,10 @@ function riffle(deck) {
 
 // reorder the deck along a split point, random if not supplied
 // IDEA: slice instead of splice to preserve input
+// IDEA: throw an error for (position === 0 || position === deck.length) ?
 // Mutates the input deck
-function cut(deck, position) {
-  if(typeof(position) === "undefined")
-    position = Math.floor(Math.random() * deck.length)
-  
-  let removed = deck.splice(position, deck.length-position)
-  deck.splice(0, 0, ...removed)
+function cut(deck, position = Math.floor(Math.random() * (deck.length-1))) {
+  deck.splice(0, 0, ...deck.splice(position, deck.length-position))
 }
 
 // Fisher-Yates (aka Knuth) shuffle
