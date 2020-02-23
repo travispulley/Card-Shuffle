@@ -6,15 +6,16 @@ A collection of card shuffling techniques in a variety of languages, frameworks,
   * Random Sort
   * Riffle
   * Cut
+* Demo Runner (for JavaScript code)
 
 ## TODO
-* Standard 52-card Deck Mapping
+* Deck-specific code in its own module
 * Performance Tests
 * TypeScript Implementation
 * GoLang Implementation
 * C# Implementation
 * Python Implementation
-* Unit Tests
+* More, Better Unit Tests
 * Code Cleanup and Organization
 * Fisher-Yates (aka Knuth) shuffle implementation
   * See https://github.com/Daplie/knuth-shuffle
