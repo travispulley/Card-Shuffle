@@ -20,7 +20,7 @@ A collection of card shuffling techniques in a variety of languages, frameworks,
 * GoLang
   * More Implementation
   * Separate code into more files
-  * Implementations
+* Implementations
   * TypeScript
   * C#
   * Python
