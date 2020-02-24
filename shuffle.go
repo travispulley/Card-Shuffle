@@ -21,7 +21,7 @@ func main() {
 	rand.Seed(time.Now().UnixNano())
 	var deck []Card
 
-	// make a standard 52-card dec
+	// Make a standard 52-card deck
 	// TODO figure out more concise code
 	for i := 0; i < 52; i++ {
 		var value, suit string
