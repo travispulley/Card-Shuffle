@@ -36,7 +36,7 @@ func main() {
 	fmt.Println("\nShuffled Deck\n", shuffle(deck))
 
 	// Performance tests
-	// IDEA: use goroutines and get faster results? Answer: no, it runs 3x slower so far
+	// IDEA: use goroutines and get faster results? Answer: no, it runs 10x slower so far
 	loops := 100000
 
 	fmt.Println("\nPerformance tests on", loops, "loops:")
@@ -53,16 +53,18 @@ func main() {
 	}
 	fmt.Println("Shuffle", time.Since(start))
 
-	loops = 100000
-	fmt.Println("\nPerformance tests with go routines on", loops, "loops:")
+	loops = 10000
+	batches := 10
+	fmt.Println("\nPerformance tests with go routines on", batches, "batches of", loops, "loops:")
 
-	// PERF: this runs 3x slower, need to learn more about how and why
+	// PERF: this runs 10x slower, need to learn more about how and why
 	var wg sync.WaitGroup
 	start = time.Now()
-	for i := 0; i < loops; i++ {
+	for i := 0; i < batches; i++ {
 		wg.Add(1)
-		go multiShuffle(deck, &wg)
+		go multiShuffle(deck, loops, &wg)
 	}
+	wg.Wait()
 	fmt.Println("Multi Shuffle", time.Since(start))
 }
 
@@ -81,9 +83,11 @@ func shuffle(deck []Card) []Card {
 	return deck
 }
 
-func multiShuffle(deck []Card, wg *sync.WaitGroup) []Card {
+func multiShuffle(deck []Card, loops int, wg *sync.WaitGroup) []Card {
 	defer wg.Done()
 
-	shuffle(deck)
+	for i := 0; i < loops; i++ {
+		deck = shuffle(deck)
+	}
 	return deck
 }
