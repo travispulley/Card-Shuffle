@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"math"
 	"math/rand"
+	"sync"
 	"time"
 )
 
@@ -35,7 +36,7 @@ func main() {
 	fmt.Println("\nShuffled Deck\n", shuffle(deck))
 
 	// Performance tests
-	// IDEA: use goroutines and get faster results?
+	// IDEA: use goroutines and get faster results? Answer: no, it runs 3x slower so far
 	loops := 100000
 
 	fmt.Println("\nPerformance tests on", loops, "loops:")
@@ -51,6 +52,18 @@ func main() {
 		shuffle(deck)
 	}
 	fmt.Println("Shuffle", time.Since(start))
+
+	loops = 100000
+	fmt.Println("\nPerformance tests with go routines on", loops, "loops:")
+
+	// PERF: this runs 3x slower, need to learn more about how and why
+	var wg sync.WaitGroup
+	start = time.Now()
+	for i := 0; i < loops; i++ {
+		wg.Add(1)
+		go multiShuffle(deck, &wg)
+	}
+	fmt.Println("Multi Shuffle", time.Since(start))
 }
 
 func fisherYates(deck []Card) []Card {
@@ -65,5 +78,12 @@ func shuffle(deck []Card) []Card {
 	rand.Shuffle(len(deck), func(i, j int) {
 		deck[i], deck[j] = deck[j], deck[i]
 	})
+	return deck
+}
+
+func multiShuffle(deck []Card, wg *sync.WaitGroup) []Card {
+	defer wg.Done()
+
+	shuffle(deck)
 	return deck
 }
