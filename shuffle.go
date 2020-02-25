@@ -22,54 +22,10 @@ func main() {
 	var deck []Card
 
 	// Make a standard 52-card deck
-	// TODO figure out more concise code
+	suits := []string{"Clubs", "Diamonds", "Hearts", "Spades"}
+	values := []string{"2", "3", "4", "5", "6", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"}
 	for i := 0; i < 52; i++ {
-		var value, suit string
-
-		// assign suit
-		switch math.Floor(float64(i) / 13) {
-		case 0:
-			suit = "Clubs"
-		case 1:
-			suit = "Diamonds"
-		case 2:
-			suit = "Hearts"
-		case 3:
-			suit = "Spades"
-		}
-
-		// assign value
-		switch i % 13 {
-		case 0:
-			value = "2"
-		case 1:
-			value = "3"
-		case 2:
-			value = "4"
-		case 3:
-			value = "5"
-		case 4:
-			value = "6"
-		case 5:
-			value = "6"
-		case 6:
-			value = "7"
-		case 7:
-			value = "8"
-		case 8:
-			value = "9"
-		case 9:
-			value = "10"
-		case 10:
-			value = "Jack"
-		case 11:
-			value = "Queen"
-		case 12:
-			value = "King"
-		case 13:
-			value = "Ace"
-		}
-		deck = append(deck, Card{i, value, suit})
+		deck = append(deck, Card{i, values[i%13], suits[int(math.Floor(float64(i)/13))]})
 	}
 
 	fmt.Println("Unshuffled Deck\n", deck)
